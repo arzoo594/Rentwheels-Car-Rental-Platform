@@ -24,7 +24,13 @@ async function run() {
     const carsDB = client.db("cars-rental-platform");
     const carsCollection = carsDB.collection("car");
 
-    // post apii
+    // post apiii
+
+    app.post("/cars", async (req, res) => {
+      const newCar = req.body;
+      const result = await carsCollection.insertOne(newCar);
+      res.send(result);
+    });
 
     await client.db("admin").command({ ping: 1 });
     console.log(
